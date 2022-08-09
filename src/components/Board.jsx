@@ -2,25 +2,55 @@ import React, { useState } from 'react';
 import Square from './square.jsx';
 export const Board = () => {
   const [board, seatBoard] = useState(Array(9).fill(null));
+  const handleSqareClc = () => {
+    seatBoard(prev => {
+      return prev.map((Square, pos) => {
+        if (pos === position) {
+          return x;
+        }
+        return Square;
+      });
+    });
+  };
+  // const handleSqareClc = position => {
+  //   return (
+  //     <Square
+  //       value={board[position]}
+  //       onclick={() => handleSqareClc(position)}
+  //     />
+  //   );
+  // };
+  const renderSquare = position => {
+    return (
+      <Square
+        value={board[position]}
+        onclick={() => handleSqareClc(position)}
+      />
+    );
+  };
+  // const renderSquare = () => {
+  //   seatBoard(5);
+  // };
   console.log(board);
   return (
     <div className="board">
+      {/* {renderSquare(0)} */}
       <div className="board-row">
-        <Square value={1} />
-        <Square value={2} />
-        <Square value={3} />
+        {renderSquare(0)}
+        {renderSquare(1)}
+        {renderSquare(2)}
       </div>
 
       <div className="board-row">
-        <Square value={4} />
-        <Square value={5} />
-        <Square value={6} />
+        {renderSquare(3)}
+        {renderSquare(4)}
+        {renderSquare(5)}
       </div>
 
       <div className="board-row">
-        <Square value={7} />
-        <Square value={8} />
-        <Square value={9} />
+        {renderSquare(6)}
+        {renderSquare(7)}
+        {renderSquare(8)}
       </div>
     </div>
   );
