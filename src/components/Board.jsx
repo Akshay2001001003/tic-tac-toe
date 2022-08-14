@@ -1,52 +1,49 @@
 import React, { useState } from 'react';
-import Square from './square.jsx';
-export const Board = () => {
-  const [board, seatBoard] = useState(Array(9).fill(null));
-  const handleSqareClc = () => {
-    seatBoard(prev => {
-      return prev.map((Square, pos) => {
+import Square from './Square';
+
+const Board = () => {
+  const [board, setBoard] = useState(Array(9).fill(null));
+  const [isXNext, setIsXNext] = useState(false);
+
+  const handleSquareClick = position => {
+    if (board[position]) {
+      return;
+    }
+
+    setBoard(prev => {
+      return prev.map((square, pos) => {
         if (pos === position) {
-          return x;
+          return isXNext ? 'X' : 'O';
         }
-        return Square;
+
+        return square;
       });
     });
+
+    setIsXNext(prev => !prev);
   };
-  // const handleSqareClc = position => {
-  //   return (
-  //     <Square
-  //       value={board[position]}
-  //       onclick={() => handleSqareClc(position)}
-  //     />
-  //   );
-  // };
+
   const renderSquare = position => {
     return (
       <Square
         value={board[position]}
-        onclick={() => handleSqareClc(position)}
+        onClick={() => handleSquareClick(position)}
       />
     );
   };
-  // const renderSquare = () => {
-  //   seatBoard(5);
-  // };
-  console.log(board);
+
   return (
     <div className="board">
-      {/* {renderSquare(0)} */}
       <div className="board-row">
         {renderSquare(0)}
         {renderSquare(1)}
         {renderSquare(2)}
       </div>
-
       <div className="board-row">
         {renderSquare(3)}
         {renderSquare(4)}
         {renderSquare(5)}
       </div>
-
       <div className="board-row">
         {renderSquare(6)}
         {renderSquare(7)}
@@ -55,4 +52,5 @@ export const Board = () => {
     </div>
   );
 };
+
 export default Board;
