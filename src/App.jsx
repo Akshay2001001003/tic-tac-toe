@@ -7,8 +7,8 @@ const App = () => {
     { board: Array(9).fill(null), isXNext: true },
   ]);
   const [currentMove, setCurrentMove] = useState(0);
-  const winner = calculateWinner(current.board);
   const current = history[currentMove];
+  const winner = calculateWinner(current.board);
   const message = winner
     ? `winner is ${winner}`
     : `next player is ${current.isXNext ? `X` : `O`}`;
